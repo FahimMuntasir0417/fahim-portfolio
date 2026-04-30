@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { ContactForm } from "@/components/ui/contact-form";
@@ -13,6 +13,12 @@ const contactPoints = [
     value: siteConfig.email,
     href: `mailto:${siteConfig.email}`,
     icon: Mail
+  },
+  {
+    label: "Phone",
+    value: siteConfig.phone,
+    href: siteConfig.phoneHref,
+    icon: Phone
   },
   ...socialLinks
     .filter((link) => link.label === "GitHub" || link.label === "LinkedIn")

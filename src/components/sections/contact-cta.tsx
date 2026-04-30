@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Github, Globe2, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, Github, Globe2, Linkedin, Mail, Phone } from "lucide-react";
 import { useRef } from "react";
 import { Container } from "@/components/layout/container";
 import { buttonVariants } from "@/components/ui/button";
@@ -14,11 +14,13 @@ const iconMap = {
   GitHub: Github,
   LinkedIn: Linkedin,
   Email: Mail,
+  Phone,
   X: Globe2
 } as const;
 
 const links = [
   { label: "Email", href: `mailto:${siteConfig.email}`, display: siteConfig.email },
+  { label: "Phone", href: siteConfig.phoneHref, display: siteConfig.phone },
   ...socialLinks.map((link) => ({
     label: link.label,
     href: link.href,
@@ -125,6 +127,8 @@ export function ContactCta() {
                         ? iconMap.LinkedIn
                         : link.label === "X"
                           ? iconMap.X
+                          : link.label === "Phone"
+                            ? iconMap.Phone
                           : iconMap.Email;
 
                   return (

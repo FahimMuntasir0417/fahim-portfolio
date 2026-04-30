@@ -14,7 +14,9 @@ export const siteConfig = {
   resumeHref: "/resume",
   location: "Jeshore, Bangladesh",
   email: "fahimmuntasirbejoy@gmail.com",
-  url: "https://example.com",
+  phone: "01935880417",
+  phoneHref: "tel:+8801935880417",
+  url: "https://fahim-portfolio-dun.vercel.app/",
   language: "en",
   locale: "en_US",
   profileImage: {

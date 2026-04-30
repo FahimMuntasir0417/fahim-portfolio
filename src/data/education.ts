@@ -24,7 +24,7 @@ export const education: EducationItem[] = [
   {
     degree: "Higher Secondary Certificate (HSC)",
     institution: "Rupdia Shaheed Smrity College",
-    period: "Completion Year",
+    period: "2021-2023",
     location: "Jeshore",
     summary:
       "Completed HSC before moving into higher technical education. The combination of academic study and self-directed programming practice helped build the discipline needed for software development.",
