@@ -215,7 +215,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "ecospark-frontend",
-    title: "EcoSpark Frontend",
+    title: "EcoSpark",
     category: "Sustainability innovation platform",
     summary:
       "A role-based sustainability platform where users can discover eco ideas, manage campaigns, access premium innovation content, and collaborate around environmental solutions.",
@@ -255,7 +255,7 @@ export const projects: Project[] = [
       { label: "Role-based flows", value: "Multiple" },
       { label: "Deployment", value: "Vercel" },
     ],
-    image: "/images/projects/ecospark.svg",
+    image: "/images/projects/eco.png",
     year: "2026",
     featured: true,
     links: [
@@ -297,7 +297,7 @@ export const projects: Project[] = [
   },
   {
     slug: "foodnest-client",
-    title: "FoodNest Client",
+    title: "FoodNest",
     category: "Food ordering platform",
     summary:
       "A modern food ordering frontend that helps users browse food items, explore restaurant-style experiences, and interact with a clean client-side ordering flow.",
@@ -336,7 +336,7 @@ export const projects: Project[] = [
       { label: "Repository type", value: "Client" },
       { label: "Deployment ready", value: "Yes" },
     ],
-    image: "/images/projects/foodnest.svg",
+    image: "/images/projects/food.png",
     year: "2026",
     featured: true,
     links: [
