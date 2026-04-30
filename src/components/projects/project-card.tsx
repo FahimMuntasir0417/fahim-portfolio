@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/glass-card";
+import { TechLogo } from "@/components/ui/tech-logo";
 import type { Project } from "@/data/projects";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
@@ -111,8 +112,9 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
           {project.stack.slice(0, 3).map((item) => (
             <span
               key={item}
-              className="rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-200"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/45 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-200 backdrop-blur"
             >
+              <TechLogo name={item} className="h-5 w-5 border-white/20 p-1" />
               {item}
             </span>
           ))}
@@ -160,8 +162,9 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
           {project.stack.map((item) => (
             <span
               key={item}
-              className="rounded-full border border-border bg-surface-2 px-3 py-1 text-xs text-muted"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1 text-xs text-muted"
             >
+              <TechLogo name={item} className="h-5 w-5 border-white/10 p-1" />
               {item}
             </span>
           ))}

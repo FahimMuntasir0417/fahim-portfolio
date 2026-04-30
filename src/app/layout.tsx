@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
 import { MotionLayer } from "@/components/animation/motion-layer";
+import { SmoothScroll } from "@/components/animation/smooth-scroll";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { SiteBackground } from "@/components/layout/site-background";
@@ -116,6 +117,7 @@ export default function RootLayout({
           </div>
           <JsonLd data={websiteJsonLd} />
           {siteStatus.hasConfiguredIdentity ? <JsonLd data={personJsonLd} /> : null}
+          <SmoothScroll />
           <MotionLayer />
         </ThemeProvider>
       </body>

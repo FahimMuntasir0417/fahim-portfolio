@@ -15,6 +15,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/glass-card";
 import { ProfilePhoto } from "@/components/ui/profile-photo";
 import { SectionHeader } from "@/components/ui/section-header";
+import { TechLogo } from "@/components/ui/tech-logo";
 import { education } from "@/data/education";
 import { experience } from "@/data/experience";
 import { skillGroups } from "@/data/skills";
@@ -219,8 +220,9 @@ export default function AboutPage() {
                       {group.items.map((item) => (
                         <span
                           key={item}
-                          className="rounded-full border border-border bg-surface-2 px-3 py-1 text-sm text-muted"
+                          className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1 text-sm text-muted"
                         >
+                          <TechLogo name={item} className="h-5 w-5 border-white/10 p-1" />
                           {item}
                         </span>
                       ))}

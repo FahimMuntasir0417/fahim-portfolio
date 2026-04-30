@@ -50,8 +50,8 @@ export const siteConfig = {
     "AI-assisted workflow features",
   ],
   socials: {
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
+    github: "https://github.com/FahimMuntasir0417",
+    linkedin: "https://www.linkedin.com/in/md-fahim-muntasir-aa536b366/",
     x: "https://x.com/yourusername",
   },
   stats: [

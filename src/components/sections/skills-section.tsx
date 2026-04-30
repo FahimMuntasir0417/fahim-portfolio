@@ -2,7 +2,6 @@
 
 import {
   BrainCircuit,
-  CheckCircle2,
   Code2,
   Database,
   Gauge,
@@ -19,6 +18,7 @@ import { Container } from "@/components/layout/container";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { GlassCard } from "@/components/ui/glass-card";
 import { SectionHeader } from "@/components/ui/section-header";
+import { TechLogo } from "@/components/ui/tech-logo";
 import { gsap, registerGsapPlugins, useGSAP } from "@/lib/gsap";
 
 const groupIcons: Record<string, LucideIcon> = {
@@ -27,33 +27,6 @@ const groupIcons: Record<string, LucideIcon> = {
   Database,
   Tools: Wrench,
   "AI/ML": BrainCircuit
-};
-
-const skillIcons: Record<string, LucideIcon> = {
-  "Next.js": Code2,
-  React: Sparkles,
-  TypeScript: Code2,
-  "Tailwind CSS": Layers3,
-  GSAP: Gauge,
-  ScrollTrigger: Sparkles,
-  "Node.js": Server,
-  Express: Server,
-  Prisma: Database,
-  "REST APIs": Gauge,
-  "Authentication flows": CheckCircle2,
-  PostgreSQL: Database,
-  MongoDB: Database,
-  "Relational design": Layers3,
-  "Query optimization": Gauge,
-  Git: Wrench,
-  Docker: Wrench,
-  Vercel: Sparkles,
-  "CI thinking": CheckCircle2,
-  "Design systems": Layers3,
-  "OpenAI APIs": BrainCircuit,
-  "Prompt workflows": Sparkles,
-  "Vector search basics": Gauge,
-  "Evaluation thinking": CheckCircle2
 };
 
 const totalSkillCount = skillGroups.reduce((total, group) => total + group.items.length, 0);
@@ -257,23 +230,16 @@ export function SkillsSection() {
                     <p className="mt-4 text-sm leading-7 text-muted">{group.description}</p>
 
                     <div className="mt-6 flex flex-wrap gap-2">
-                      {group.items.map((item) => {
-                        const SkillIcon = skillIcons[item] ?? CheckCircle2;
-
-                        return (
-                          <span
-                            key={item}
-                            data-skill-chip
-                            className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-black/10 px-3 py-2 text-sm text-muted"
-                          >
-                            <SkillIcon
-                              className="h-3.5 w-3.5"
-                              style={{ color: `rgb(${group.tone})` }}
-                            />
-                            {item}
-                          </span>
-                        );
-                      })}
+                      {group.items.map((item) => (
+                        <span
+                          key={item}
+                          data-skill-chip
+                          className="inline-flex items-center gap-2 rounded-full border border-white/8 bg-black/10 px-3 py-2 text-sm text-muted"
+                        >
+                          <TechLogo name={item} className="h-6 w-6" />
+                          {item}
+                        </span>
+                      ))}
                     </div>
 
                     <div className="mt-6 flex items-center justify-between rounded-[22px] border border-white/8 bg-white/[0.04] px-4 py-3">

@@ -2,19 +2,61 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight, CheckCircle2, Code2, ExternalLink, Github } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  CheckCircle2,
+  ExternalLink,
+  Github,
+  Globe2,
+  ServerCog
+} from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { JsonLd } from "@/components/seo/json-ld";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { buttonVariants } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/glass-card";
 import { SectionHeader } from "@/components/ui/section-header";
-import { getProjectBySlug, projects } from "@/data/projects";
+import { TechLogo } from "@/components/ui/tech-logo";
+import { getProjectBySlug, projects, type ProjectLink } from "@/data/projects";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 type ProjectPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+function getProjectLinkIcon(link: ProjectLink) {
+  const label = link.label.toLowerCase();
+  const href = link.href.toLowerCase();
+
+  if (label.includes("backend") || label.includes("server")) {
+    return ServerCog;
+  }
+
+  if (label.includes("github") || label.includes("repository") || href.includes("github.com")) {
+    return Github;
+  }
+
+  if (label.includes("live") || label.includes("demo")) {
+    return Globe2;
+  }
+
+  return ExternalLink;
+}
+
+function getProjectLinkVariant(link: ProjectLink) {
+  const label = link.label.toLowerCase();
+
+  if (label.includes("live") || label.includes("demo")) {
+    return "primary" as const;
+  }
+
+  if (label.includes("backend") || label.includes("server")) {
+    return "outline" as const;
+  }
+
+  return "secondary" as const;
+}
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
@@ -67,12 +109,11 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound();
   }
 
-  const liveProjectLink = project.links.find((link) =>
-    link.label.toLowerCase().includes("live")
-  );
-  const githubRepositoryLink = project.links.find((link) =>
-    link.label.toLowerCase().includes("github")
-  );
+  const projectLinks = project.links.map((link) => ({
+    ...link,
+    Icon: getProjectLinkIcon(link),
+    variant: getProjectLinkVariant(link)
+  }));
 
   const projectJsonLd = {
     "@context": "https://schema.org",
@@ -118,31 +159,32 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 {project.stack.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-border bg-surface-2 px-3 py-1 text-sm text-muted"
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1 text-sm text-muted"
                   >
+                    <TechLogo name={item} className="h-5 w-5 border-white/10 p-1" />
                     {item}
                   </span>
                 ))}
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                {project.links.map((link) => {
-                  const isGithub = link.label.toLowerCase().includes("github");
-                  const Icon = isGithub ? Github : ExternalLink;
-
+                {projectLinks.map((link) => {
+                  const Icon = link.Icon;
                   return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={buttonVariants({
-                      variant: isGithub ? "secondary" : "primary"
-                    })}
-                  >
-                    {link.label}
-                    <Icon className="ml-2 h-4 w-4" />
-                  </a>
+                    <a
+                      key={link.label}
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Open ${link.label}`}
+                      className={buttonVariants({
+                        variant: link.variant
+                      })}
+                    >
+                      <Icon className="mr-2 h-4 w-4" />
+                      {link.label}
+                      <ArrowUpRight className="ml-2 h-4 w-4" />
+                    </a>
                   );
                 })}
               </div>
@@ -186,41 +228,39 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                         key={item}
                         className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-2 px-3 py-1 text-sm text-muted"
                       >
-                        <Code2 className="h-3.5 w-3.5 text-accent" />
+                        <TechLogo name={item} className="h-5 w-5 border-white/10 p-1" />
                         {item}
                       </span>
                     ))}
                   </div>
                 </div>
-                {liveProjectLink ? (
+                {projectLinks.length > 0 ? (
                   <div>
-                    <p className="text-sm text-muted">Live project link</p>
-                    <a
-                      href={liveProjectLink.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-2 inline-flex items-center text-lg font-semibold text-foreground hover:text-accent"
-                    >
-                      {liveProjectLink.href}
-                      <ArrowUpRight className="ml-2 h-4 w-4" />
-                    </a>
-                  </div>
-                ) : null}
-                {githubRepositoryLink ? (
-                  <div>
-                    <p className="text-sm text-muted">GitHub repository link</p>
-                    <a
-                      href={githubRepositoryLink.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-2 inline-flex items-center text-lg font-semibold text-foreground hover:text-accent"
-                    >
-                      {githubRepositoryLink.href}
-                      <Github className="ml-2 h-4 w-4" />
-                    </a>
-                    <p className="mt-2 text-sm leading-7 text-muted">
-                      Repository links can be replaced or hidden when a client project is private.
-                    </p>
+                    <p className="text-sm text-muted">Project links</p>
+                    <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                      {projectLinks.map((link) => {
+                        const Icon = link.Icon;
+
+                        return (
+                          <a
+                            key={link.label}
+                            href={link.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`Open ${link.label}`}
+                            className="group flex items-center justify-between gap-4 rounded-2xl border border-white/6 bg-black/10 px-4 py-4 text-sm text-muted transition hover:border-accent/25 hover:bg-accent-soft hover:text-foreground"
+                          >
+                            <span className="flex min-w-0 items-center gap-3">
+                              <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/8 bg-surface-2 text-accent">
+                                <Icon className="h-4 w-4" />
+                              </span>
+                              <span className="font-semibold text-foreground">{link.label}</span>
+                            </span>
+                            <ArrowUpRight className="h-4 w-4 shrink-0 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+                          </a>
+                        );
+                      })}
+                    </div>
                   </div>
                 ) : null}
                 <div>
