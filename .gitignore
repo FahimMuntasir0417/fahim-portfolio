@@ -1,0 +1,10 @@
+node_modules
+.next
+.next-stale
+out
+dist
+.dist
+.tmp
+.vercel
+.DS_Store
+*.log
