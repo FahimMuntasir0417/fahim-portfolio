@@ -61,9 +61,10 @@ const commands: CommandItem[] = [
   },
   {
     label: "Resume",
-    href: "/resume",
+    href: siteConfig.resumeHref,
     icon: FileText,
-    description: "Open the professional resume page."
+    description: "Open and download the resume.",
+    external: true
   },
   {
     label: "GitHub",
@@ -148,7 +149,7 @@ export function CommandMenu({ open, onOpenChange }: CommandMenuProps) {
                     key={item.label}
                     href={item.href}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="mb-2 flex items-start gap-4 rounded-2xl border border-transparent px-4 py-3 hover:border-white/10 hover:bg-white/[0.03]"
                     onClick={() => handleOpenChange(false)}
                   >

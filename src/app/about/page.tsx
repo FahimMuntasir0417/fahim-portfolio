@@ -4,7 +4,6 @@ import {
   ArrowRight,
   BadgeCheck,
   Blocks,
-  BriefcaseBusiness,
   GraduationCap,
   ShieldCheck,
   Wrench
@@ -17,7 +16,6 @@ import { ProfilePhoto } from "@/components/ui/profile-photo";
 import { SectionHeader } from "@/components/ui/section-header";
 import { TechLogo } from "@/components/ui/tech-logo";
 import { education } from "@/data/education";
-import { experience } from "@/data/experience";
 import { skillGroups } from "@/data/skills";
 import { siteConfig } from "@/lib/site";
 
@@ -134,30 +132,6 @@ export default function AboutPage() {
               </div>
             </GlassCard>
           </AnimatedSection>
-        </div>
-
-        <div className="mt-16 grid gap-5 md:grid-cols-3">
-          {[
-            {
-              title: "Programming journey",
-              description: siteConfig.aboutMe.journey
-            },
-            {
-              title: "Work I enjoy",
-              description: siteConfig.aboutMe.enjoy
-            },
-            {
-              title: "Outside programming",
-              description: siteConfig.aboutMe.personality
-            }
-          ].map((item, index) => (
-            <AnimatedSection key={item.title} delay={index * 0.06}>
-              <GlassCard className="h-full p-6">
-                <p className="text-xs uppercase tracking-[0.22em] text-accent">{item.title}</p>
-                <p className="mt-4 text-sm leading-8 text-muted">{item.description}</p>
-              </GlassCard>
-            </AnimatedSection>
-          ))}
         </div>
 
         <div className="mt-16 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -278,38 +252,6 @@ export default function AboutPage() {
                       </div>
                     ))}
                   </div>
-                </GlassCard>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-16">
-          <AnimatedSection>
-            <SectionHeader
-              eyebrow="Experience"
-              title="Professional experience framed around scope, ownership, and outcomes."
-              description="Independent, freelance, and product-driven work can be highly credible when the business context, responsibilities, and delivery results are explained clearly."
-            />
-          </AnimatedSection>
-
-          <div className="mt-8 grid gap-5 lg:grid-cols-3">
-            {experience.map((item, index) => (
-              <AnimatedSection key={item.title} delay={index * 0.07}>
-                <GlassCard className="h-full p-6">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.22em] text-accent">{item.period}</p>
-                      <h3 className="mt-3 font-display text-2xl font-semibold text-foreground">
-                        {item.title}
-                      </h3>
-                    </div>
-                    <span className="rounded-full border border-white/8 bg-surface-3 p-3 text-accent">
-                      <BriefcaseBusiness className="h-4 w-4" />
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm text-muted">{item.company}</p>
-                  <p className="mt-5 text-sm leading-7 text-muted">{item.summary}</p>
                 </GlassCard>
               </AnimatedSection>
             ))}

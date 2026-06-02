@@ -99,9 +99,14 @@ export function ContactCta() {
                     Start a conversation
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
-                  <Link href="/resume" className={buttonVariants({ variant: "secondary", size: "lg" })}>
+                  <a
+                    href={siteConfig.resumeHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={buttonVariants({ variant: "secondary", size: "lg" })}
+                  >
                     View resume
-                  </Link>
+                  </a>
                 </div>
 
                 <p data-contact-reveal className="mt-4 text-sm text-muted">{siteConfig.responseTime}</p>
@@ -110,8 +115,8 @@ export function ContactCta() {
               <div data-contact-reveal className="rounded-[28px] border border-white/8 bg-black/10 p-5 sm:p-6">
                 <p className="text-xs uppercase tracking-[0.22em] text-accent">Project inquiry</p>
                 <p className="mt-3 text-sm leading-7 text-muted">
-                  Send a concise first message with goals, scope, and timeline. The form prepares a
-                  structured email draft using your local mail client.
+                  Send a concise first message with goals, scope, and timeline. The form submits
+                  directly through the portfolio contact API.
                 </p>
                 <div className="mt-6">
                   <ContactForm />
@@ -136,7 +141,7 @@ export function ContactCta() {
                       key={link.label}
                       href={link.href}
                       target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       data-cursor="hover"
                       className="rounded-[24px] border border-white/8 bg-black/10 px-5 py-4 hover:-translate-y-0.5 hover:border-accent/20 hover:bg-accent-soft"
                     >

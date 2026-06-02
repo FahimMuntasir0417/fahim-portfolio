@@ -74,7 +74,7 @@ export function Footer() {
                       key={link.label}
                       href={link.href}
                       target={link.href.startsWith("http") ? "_blank" : undefined}
-                      rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-3 px-4 py-2 text-sm text-muted hover:border-accent/25 hover:bg-accent-soft hover:text-foreground"
                     >
                       <Icon className="h-4 w-4" />

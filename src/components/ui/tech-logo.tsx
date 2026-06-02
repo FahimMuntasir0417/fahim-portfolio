@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import {
   Bot,
   Braces,
@@ -31,7 +31,20 @@ const logoAssets: Record<string, LogoAsset> = {
     bgClass: "bg-white",
     imgClass: "h-4 w-4"
   },
+  "Next.js 16": {
+    src: `${deviconBase}/nextjs/nextjs-original.svg`,
+    bgClass: "bg-white",
+    imgClass: "h-4 w-4"
+  },
+  "Next.js App Router": {
+    src: `${deviconBase}/nextjs/nextjs-original.svg`,
+    bgClass: "bg-white",
+    imgClass: "h-4 w-4"
+  },
   React: {
+    src: `${deviconBase}/react/react-original.svg`
+  },
+  "React 19": {
     src: `${deviconBase}/react/react-original.svg`
   },
   TypeScript: {
@@ -39,6 +52,33 @@ const logoAssets: Record<string, LogoAsset> = {
   },
   "Tailwind CSS": {
     src: `${deviconBase}/tailwindcss/tailwindcss-original.svg`
+  },
+  "Tailwind CSS 4": {
+    src: `${deviconBase}/tailwindcss/tailwindcss-original.svg`
+  },
+  "TanStack Query": {
+    src: "https://cdn.simpleicons.org/reactquery/FF4154",
+    bgClass: "bg-white"
+  },
+  "TanStack Form": {
+    src: "https://cdn.simpleicons.org/reactquery/FF4154",
+    bgClass: "bg-white"
+  },
+  Zustand: {
+    src: "https://cdn.simpleicons.org/react/61DAFB",
+    bgClass: "bg-[#07111f]"
+  },
+  "React Hook Form": {
+    src: "https://cdn.simpleicons.org/reacthookform/EC5990",
+    bgClass: "bg-white"
+  },
+  Zod: {
+    src: "https://cdn.simpleicons.org/zod/3E67B1",
+    bgClass: "bg-white"
+  },
+  Axios: {
+    src: "https://cdn.simpleicons.org/axios/5A29E4",
+    bgClass: "bg-white"
   },
   GSAP: {
     src: "https://cdn.simpleicons.org/greensock/88CE02",
@@ -52,6 +92,10 @@ const logoAssets: Record<string, LogoAsset> = {
     src: `${deviconBase}/nodejs/nodejs-original.svg`
   },
   Express: {
+    src: `${deviconBase}/express/express-original.svg`,
+    bgClass: "bg-white"
+  },
+  "Express.js": {
     src: `${deviconBase}/express/express-original.svg`,
     bgClass: "bg-white"
   },
@@ -78,6 +122,30 @@ const logoAssets: Record<string, LogoAsset> = {
   "OpenAI APIs": {
     src: "https://cdn.simpleicons.org/openai/ffffff",
     bgClass: "bg-[#07111f]"
+  },
+  "Gemini API": {
+    src: "https://cdn.simpleicons.org/googlegemini/8E75B9",
+    bgClass: "bg-white"
+  },
+  JWT: {
+    src: "https://cdn.simpleicons.org/jsonwebtokens/000000",
+    bgClass: "bg-white"
+  },
+  Nodemailer: {
+    src: "https://cdn.simpleicons.org/maildotru/005FF9",
+    bgClass: "bg-white"
+  },
+  Pino: {
+    src: "https://cdn.simpleicons.org/pino/F7DF1E",
+    bgClass: "bg-[#07111f]"
+  },
+  PNPM: {
+    src: "https://cdn.simpleicons.org/pnpm/F69220",
+    bgClass: "bg-white"
+  },
+  Bun: {
+    src: "https://cdn.simpleicons.org/bun/000000",
+    bgClass: "bg-white"
   },
   MDX: {
     src: "https://cdn.simpleicons.org/mdx/ffffff",
@@ -138,11 +206,13 @@ export function TechLogo({ name, className }: TechLogoProps) {
         title={name}
         aria-hidden="true"
       >
-        <img
+        <Image
           src={logo.src}
-          alt=""
+          alt={`${name} logo`}
+          width={20}
+          height={20}
           loading="lazy"
-          decoding="async"
+          unoptimized
           className={cn("h-5 w-5 object-contain", logo.imgClass)}
         />
       </span>

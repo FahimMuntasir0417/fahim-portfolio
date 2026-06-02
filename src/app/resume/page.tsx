@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { buttonVariants } from "@/components/ui/button";
 import { GlassCard } from "@/components/ui/glass-card";
 import { SectionHeader } from "@/components/ui/section-header";
 import { education } from "@/data/education";
-import { experience } from "@/data/experience";
 import { projects } from "@/data/projects";
 import { skillGroups } from "@/data/skills";
 import { siteConfig } from "@/lib/site";
@@ -36,6 +35,15 @@ export default function ResumePage() {
             <Link href="/projects" className={buttonVariants({ variant: "secondary" })}>
               View case studies
             </Link>
+            <a
+              href={siteConfig.resumeHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={buttonVariants({ variant: "outline" })}
+            >
+              Download from Google Drive
+              <Download className="ml-2 h-4 w-4" />
+            </a>
           </div>
         </AnimatedSection>
 
@@ -97,38 +105,6 @@ export default function ResumePage() {
                           className="rounded-2xl border border-white/6 bg-black/10 px-4 py-4 text-sm leading-7 text-muted"
                         >
                           {highlight}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </GlassCard>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.22}>
-            <GlassCard className="p-8">
-              <p className="text-xs uppercase tracking-[0.22em] text-accent">Professional experience</p>
-              <div className="mt-6 space-y-6">
-                {experience.map((item) => (
-                  <div key={item.title} className="border-b border-white/8 pb-6 last:border-b-0 last:pb-0">
-                    <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
-                      <div>
-                        <h2 className="font-display text-2xl font-semibold text-foreground">
-                          {item.title}
-                        </h2>
-                        <p className="mt-1 text-sm text-muted">{item.company}</p>
-                      </div>
-                      <p className="text-sm text-muted">{item.period}</p>
-                    </div>
-                    <p className="mt-4 text-sm leading-8 text-muted">{item.summary}</p>
-                    <div className="mt-4 grid gap-3 md:grid-cols-3">
-                      {item.outcomes.map((outcome) => (
-                        <div
-                          key={outcome}
-                          className="rounded-2xl border border-white/6 bg-black/10 px-4 py-4 text-sm leading-7 text-muted"
-                        >
-                          {outcome}
                         </div>
                       ))}
                     </div>

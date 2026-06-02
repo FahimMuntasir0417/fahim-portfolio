@@ -114,10 +114,15 @@ export function Navbar() {
                 </span>
               </button>
               <ThemeToggle />
-              <Link href="/resume" className={buttonVariants({ variant: "primary", size: "sm" })}>
+              <a
+                href={siteConfig.resumeHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({ variant: "primary", size: "sm" })}
+              >
                 Resume
                 <ArrowUpRight className="ml-2 h-4 w-4" />
-              </Link>
+              </a>
             </div>
 
             <div className="flex items-center gap-2 lg:hidden">
@@ -173,13 +178,15 @@ export function Navbar() {
                 >
                   Quick nav
                 </button>
-                <Link
-                  href="/resume"
+                <a
+                  href={siteConfig.resumeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setIsMenuOpen(false)}
                   className="inline-flex items-center justify-center rounded-2xl bg-[linear-gradient(135deg,rgba(103,232,249,0.96),rgba(251,191,36,0.9))] px-4 py-3 text-sm font-medium text-slate-950"
                 >
                   Resume
-                </Link>
+                </a>
               </div>
             </div>
           ) : null}
