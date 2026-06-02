@@ -16,9 +16,21 @@
   --border: 15 23 42;
   --border-opacity: 0.08;
   --muted: 92 104 128;
-  --accent: 56 189 248;
-  --accent-soft: 56 189 248;
+  --accent: 14 116 144;
+  --accent-soft: 14 116 144;
   --accent-2: 251 191 36;
+}
+
+@font-face {
+  font-family: "Aptos";
+  src: local("Aptos"), local("Segoe UI");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bahnschrift";
+  src: local("Bahnschrift"), local("Aptos Display");
+  font-display: swap;
 }
 
 .dark {
@@ -163,6 +175,34 @@ textarea {
 
 .soft-mask {
   mask-image: linear-gradient(to bottom, black 82%, transparent 100%);
+}
+
+.hero-animated-gradient {
+  background:
+    radial-gradient(circle at 18% 24%, rgba(20, 184, 166, 0.22), transparent 32%),
+    radial-gradient(circle at 76% 14%, rgba(56, 189, 248, 0.2), transparent 28%),
+    radial-gradient(circle at 58% 82%, rgba(14, 116, 144, 0.2), transparent 34%),
+    linear-gradient(135deg, rgba(2, 6, 23, 0.94), rgba(8, 47, 73, 0.72), rgba(15, 23, 42, 0.9));
+  background-size: 150% 150%;
+  animation: heroGradientShift 24s ease-in-out infinite alternate;
+}
+
+.light .hero-animated-gradient {
+  background:
+    radial-gradient(circle at 18% 24%, rgba(20, 184, 166, 0.16), transparent 32%),
+    radial-gradient(circle at 76% 14%, rgba(56, 189, 248, 0.14), transparent 28%),
+    radial-gradient(circle at 58% 82%, rgba(14, 116, 144, 0.12), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(224, 242, 254, 0.72), rgba(248, 250, 252, 0.92));
+}
+
+@keyframes heroGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 42%;
+  }
 }
 
 @media (pointer: fine) {

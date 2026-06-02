@@ -49,7 +49,7 @@ export const metadata: Metadata = {
         url: "/images/og-card.svg",
         width: 1200,
         height: 630,
-        alt: `${siteConfig.name} portfolio preview`
+        alt: `${siteConfig.name} portfolio Open Graph card with full-stack developer branding`
       }
     ],
     locale: siteConfig.locale,
@@ -71,24 +71,33 @@ export const viewport: Viewport = {
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": absoluteUrl("#website"),
   name: siteConfig.name,
   description: siteConfig.description,
   url: siteConfig.url,
-  inLanguage: siteConfig.language
+  inLanguage: siteConfig.language,
+  publisher: {
+    "@id": absoluteUrl("#person")
+  }
 };
 
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": absoluteUrl("#person"),
   name: siteConfig.name,
+  alternateName: "Fahim Muntasir",
   jobTitle: siteConfig.role,
   description: siteConfig.description,
+  email: siteConfig.email,
+  telephone: siteConfig.phoneHref.replace("tel:", ""),
   image: absoluteUrl(siteConfig.profileImage.src),
   url: siteConfig.url,
   homeLocation: {
     "@type": "Place",
     name: siteConfig.location
   },
+  knowsAbout: [...siteConfig.keywords, ...siteConfig.services],
   sameAs: publicSameAsLinks
 };
 

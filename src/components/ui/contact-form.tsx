@@ -3,7 +3,6 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/site";
 
 type FormState = {
   name: string;
@@ -35,6 +34,7 @@ const emailPattern = /\S+@\S+\.\S+/;
 export function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState);
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
   const statusMessageId = error ? "contact-form-error" : "contact-form-status";
 
@@ -46,6 +46,9 @@ export function ContactForm() {
     if (status !== "idle") {
       setStatus("idle");
     }
+    if (successMessage) {
+      setSuccessMessage("");
+    }
   };
 
   const hasInvalidName = Boolean(error) && !form.name.trim();
@@ -53,7 +56,7 @@ export function ContactForm() {
   const hasInvalidProjectType = Boolean(error) && !form.projectType.trim();
   const hasInvalidMessage = Boolean(error) && form.message.trim().length < 20;
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!form.name.trim() || !form.email.trim() || !form.projectType.trim() || !form.message.trim()) {
@@ -72,23 +75,34 @@ export function ContactForm() {
     }
 
     setError("");
+    setSuccessMessage("");
     setStatus("submitting");
 
-    const subject = encodeURIComponent(`${form.projectType} inquiry from ${form.name}`);
-    const body = encodeURIComponent(
-      [
-        `Name: ${form.name}`,
-        `Email: ${form.email}`,
-        `Company / Organization: ${form.company || "Not provided"}`,
-        `Project type: ${form.projectType}`,
-        "",
-        form.message
-      ].join("\n")
-    );
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(form)
+      });
+      const result = (await response.json()) as { ok?: boolean; message?: string };
 
-    window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
-    setStatus("done");
-    setForm(initialState);
+      if (!response.ok || !result.ok) {
+        throw new Error(result.message || "Unable to send your inquiry right now.");
+      }
+
+      setStatus("done");
+      setSuccessMessage(result.message || "Your inquiry was sent successfully.");
+      setForm(initialState);
+    } catch (submitError) {
+      setStatus("idle");
+      setError(
+        submitError instanceof Error
+          ? submitError.message
+          : "Unable to send your inquiry right now."
+      );
+    }
   };
 
   return (
@@ -194,15 +208,14 @@ export function ContactForm() {
           {error}
         </p>
       ) : null}
-      {status === "done" ? (
+      {status === "done" && successMessage ? (
         <p id="contact-form-status" className="text-sm text-emerald-400" aria-live="polite">
-          Your email client should open with a prepared draft. If it does not, contact me directly at{" "}
-          {siteConfig.email}.
+          {successMessage}
         </p>
       ) : null}
 
       <Button type="submit" variant="primary" size="lg" disabled={status === "submitting"}>
-        {status === "submitting" ? "Preparing inquiry..." : "Send inquiry"}
+        {status === "submitting" ? "Sending inquiry..." : "Send inquiry"}
       </Button>
     </form>
   );

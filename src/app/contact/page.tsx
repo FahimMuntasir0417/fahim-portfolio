@@ -97,7 +97,7 @@ export default function ContactPage() {
                       key={item.label}
                       href={item.href}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
-                      rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                      rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="rounded-[24px] border border-white/8 bg-black/10 px-5 py-4 hover:border-accent/20 hover:bg-accent-soft"
                     >
                       <div className="flex items-center gap-4">
@@ -138,9 +138,8 @@ export default function ContactPage() {
                 Keep the first message concise, outcome-focused, and relevant.
               </h2>
               <p className="mt-5 text-sm leading-8 text-muted">
-                The current form opens your mail client with a structured draft message. In a live
-                production setup, the same UI can be connected to a transactional email service or
-                a dedicated API endpoint.
+                The form sends your inquiry securely through the portfolio contact API and returns a
+                clear delivery status after submission.
               </p>
               <div className="mt-8">
                 <ContactForm />

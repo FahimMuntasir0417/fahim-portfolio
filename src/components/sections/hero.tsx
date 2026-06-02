@@ -111,7 +111,8 @@ export function Hero() {
 
   return (
     <section ref={heroRef} className="relative overflow-hidden py-16 sm:py-24 lg:py-28">
-      <div className="absolute inset-x-0 top-0 h-[36rem] bg-[radial-gradient(circle_at_top,rgba(103,232,249,0.14),transparent_46%)]" />
+      <div className="hero-animated-gradient absolute inset-x-0 top-0 h-[42rem] opacity-70 blur-0" />
+      <div className="absolute inset-x-0 top-0 h-[42rem] bg-[radial-gradient(circle_at_top,rgba(103,232,249,0.12),transparent_52%)]" />
       <div
         data-hero-float
         className="absolute left-[7%] top-24 h-16 w-16 rounded-[24px] border border-white/10 bg-white/[0.04] shadow-soft"
@@ -161,7 +162,7 @@ export function Hero() {
                     data-hero-card
                     data-gsap-hover
                     data-cursor="hover"
-                    className="flex items-start gap-3 rounded-[24px] border border-white/8 bg-white/[0.04] px-4 py-4 shadow-soft"
+                    className="flex items-start gap-3 rounded-[24px] border border-white/8 bg-white/70 px-4 py-4 shadow-soft dark:bg-white/[0.04]"
                   >
                     <span className="mt-0.5 rounded-full bg-accent-soft p-2 text-accent">
                       <CheckCircle2 className="h-4 w-4" />
@@ -188,14 +189,16 @@ export function Hero() {
                   Contact me
                   <Mail className="ml-2 h-4 w-4" />
                 </Link>
-                <Link
+                <a
                   href={siteConfig.resumeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   data-hero-actions
                   className={buttonVariants({ variant: "outline", size: "lg" })}
                 >
                   View / Download resume
                   <Download className="ml-2 h-4 w-4" />
-                </Link>
+                </a>
                 <span data-hero-actions>
                   <CommandHint />
                 </span>
@@ -230,7 +233,7 @@ export function Hero() {
                 <div className="relative grid gap-6 md:grid-cols-[0.82fr_1.18fr]">
                   <div className="space-y-4">
                     <div className="rounded-[32px] bg-[linear-gradient(160deg,rgba(103,232,249,0.35),rgba(255,255,255,0.04),rgba(251,191,36,0.18))] p-[1px]">
-                      <div className="rounded-[31px] bg-[#081120]/90 p-3">
+                      <div className="rounded-[31px] bg-white/85 p-3 dark:bg-[#081120]/90">
                         <ProfilePhoto
                           className="aspect-[4/5] rounded-[28px] border border-white/10 shadow-card"
                           priority
@@ -239,7 +242,7 @@ export function Hero() {
                       </div>
                     </div>
 
-                    <div className="rounded-[24px] border border-white/8 bg-white/[0.03] p-5">
+                    <div className="rounded-[24px] border border-white/8 bg-white/70 p-5 dark:bg-white/[0.03]">
                       <p className="text-xs uppercase tracking-[0.22em] text-accent">
                         Preferred engagements
                       </p>
@@ -270,13 +273,13 @@ export function Hero() {
                     </p>
 
                     <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                      <div className="rounded-[22px] border border-white/8 bg-[#07111f]/80 px-4 py-4">
+                      <div className="rounded-[22px] border border-white/8 bg-white/70 px-4 py-4 dark:bg-[#07111f]/80">
                         <p className="text-xs uppercase tracking-[0.2em] text-muted">Focus</p>
                         <p className="mt-2 text-sm font-medium leading-6 text-foreground">
                           Next.js, dashboards, business websites, and AI workflow UX.
                         </p>
                       </div>
-                      <div className="rounded-[22px] border border-white/8 bg-[#07111f]/80 px-4 py-4">
+                      <div className="rounded-[22px] border border-white/8 bg-white/70 px-4 py-4 dark:bg-[#07111f]/80">
                         <p className="text-xs uppercase tracking-[0.2em] text-muted">Delivery</p>
                         <p className="mt-2 text-sm font-medium leading-6 text-foreground">
                           Clear systems, responsive polish, accessible states, and lighter bundles.
@@ -284,12 +287,12 @@ export function Hero() {
                       </div>
                     </div>
 
-                    <div className="mt-6 rounded-[24px] border border-white/8 bg-[#07111f]/85 p-5">
+                    <div className="mt-6 rounded-[24px] border border-white/8 bg-white/75 p-5 dark:bg-[#07111f]/85">
                       <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-muted">
                         <TerminalSquare className="h-4 w-4 text-accent" />
                         Current workflow
                       </div>
-                      <div className="space-y-3 font-mono text-sm text-slate-300">
+                      <div className="space-y-3 font-mono text-sm text-slate-700 dark:text-slate-300">
                         {terminalLines.map((line, index) => (
                           <p key={line}>
                             <span className="mr-3 text-accent">0{index + 1}</span>

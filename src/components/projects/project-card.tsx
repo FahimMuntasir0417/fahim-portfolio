@@ -15,10 +15,19 @@ import { cn } from "@/lib/utils";
 type ProjectCardProps = {
   project: Project;
   className?: string;
+  accentIndex?: number;
 };
 
-export function ProjectCard({ project, className }: ProjectCardProps) {
+const accentColors = [
+  "rgb(45 212 191)",
+  "rgb(251 191 36)",
+  "rgb(96 165 250)",
+  "rgb(244 114 182)"
+] as const;
+
+export function ProjectCard({ project, className, accentIndex = 0 }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const accentColor = accentColors[accentIndex % accentColors.length];
 
   useGSAP(
     () => {
@@ -90,13 +99,15 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         className
       )}
     >
+      <div className="h-1 w-full" style={{ backgroundColor: accentColor }} />
       <div className="relative overflow-hidden border-b border-white/8 bg-[#07111f]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(103,232,249,0.16),transparent_36%),linear-gradient(180deg,transparent,rgba(7,17,31,0.2))]" />
         <Image
           src={project.image}
-          alt={`${project.title} preview`}
+          alt={`${project.title} case study screenshot showing the ${project.category.toLowerCase()} interface`}
           width={1200}
           height={840}
+          loading="lazy"
           data-project-image
           className="h-[240px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
@@ -119,6 +130,17 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
             </span>
           ))}
         </div>
+
+        <Link
+          href={`/projects/${project.slug}`}
+          className="absolute inset-0 grid place-items-center bg-slate-950/0 opacity-0 backdrop-blur-0 transition duration-300 group-hover:bg-slate-950/42 group-hover:opacity-100 group-hover:backdrop-blur-[2px]"
+          aria-label={`View ${project.title} case study`}
+        >
+          <span className="inline-flex items-center rounded-full border border-white/15 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-950 shadow-card dark:bg-slate-950/85 dark:text-white">
+            View case study
+            <ArrowUpRight className="ml-2 h-4 w-4" />
+          </span>
+        </Link>
       </div>
 
       <div className="flex flex-1 flex-col p-5 sm:p-6">

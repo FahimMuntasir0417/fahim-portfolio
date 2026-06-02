@@ -11,7 +11,9 @@ const placeholderPatterns = [/your name/i, /example\.com/i, /yourusername/i];
 export const siteConfig = {
   name: "Md Fahim Muntasir",
   role: "Full-Stack Developer",
-  resumeHref: "/resume",
+  resumeHref: "https://drive.google.com/uc?export=download&id=1oAA0TXd_368yAc1_Phj2nmIJ4F-n9cHa",
+  resumeViewHref:
+    "https://drive.google.com/file/d/1oAA0TXd_368yAc1_Phj2nmIJ4F-n9cHa/view?usp=sharing",
   location: "Jeshore, Bangladesh",
   email: "fahimmuntasirbejoy@gmail.com",
   phone: "01935880417",
@@ -20,9 +22,9 @@ export const siteConfig = {
   language: "en",
   locale: "en_US",
   profileImage: {
-    src: "/images/profile-photo.png",
-    alt: "Profile portrait",
-    objectPosition: "center 18%",
+    src: "/images/profile-photo.jpg",
+    alt: "Portrait of Md Fahim Muntasir, full-stack developer",
+    objectPosition: "center 28%",
   },
   headline:
     "Full-Stack Engineer delivering scalable web applications, polished user interfaces, and workflow-focused digital products.",
@@ -54,7 +56,8 @@ export const siteConfig = {
   socials: {
     github: "https://github.com/FahimMuntasir0417",
     linkedin: "https://www.linkedin.com/in/md-fahim-muntasir-aa536b366/",
-    x: "https://x.com/yourusername",
+    // TODO_REPLACE_WITH_REAL_X
+    x: "",
   },
   stats: [
     { label: "Selected case studies", value: "03" },

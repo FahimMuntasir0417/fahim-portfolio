@@ -1,19 +1,33 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useRef } from "react";
 import { ProjectCard } from "@/components/projects/project-card";
 import { projects } from "@/data/projects";
 import { Container } from "@/components/layout/container";
-import { AnimatedSection } from "@/components/ui/animated-section";
 import { buttonVariants } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
+import { useInView } from "@/hooks/useInView";
+import { cn } from "@/lib/utils";
 
 const featuredProjects = projects.filter((project) => project.featured);
 
 export function FeaturedProjects() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef);
+
   return (
-    <section id="projects" className="py-24">
+    <section
+      ref={sectionRef}
+      id="projects"
+      className={cn(
+        "py-24 opacity-0 transition duration-700 ease-out motion-reduce:opacity-100",
+        isInView ? "translate-y-0 opacity-100" : "translate-y-8"
+      )}
+    >
       <Container>
-        <AnimatedSection className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <SectionHeader
             eyebrow="Featured Projects"
             title="Case-study driven work that explains the problem, the delivery, and the outcome."
@@ -34,13 +48,16 @@ export function FeaturedProjects() {
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
-        </AnimatedSection>
+        </div>
 
-        <div className="mt-10 grid gap-6 xl:grid-cols-3" data-gsap-stagger>
+        <div className="mt-10 grid gap-6 xl:grid-cols-3">
           {featuredProjects.map((project, index) => (
-            <AnimatedSection key={project.slug} delay={index * 0.08} data-gsap-item>
-              <ProjectCard project={project} className="h-full" />
-            </AnimatedSection>
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              className="h-full"
+              accentIndex={index}
+            />
           ))}
         </div>
       </Container>

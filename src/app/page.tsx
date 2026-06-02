@@ -1,7 +1,6 @@
 import { AboutSection } from "@/components/sections/about-section";
 import { ContactCta } from "@/components/sections/contact-cta";
 import { EducationSection } from "@/components/sections/education-section";
-import { ExperienceSection } from "@/components/sections/experience-section";
 import { FeaturedProjects } from "@/components/sections/featured-projects";
 import { Hero } from "@/components/sections/hero";
 import { HighlightGrid } from "@/components/sections/highlight-grid";
@@ -16,7 +15,6 @@ export default function HomePage() {
       <FeaturedProjects />
       <SkillsSection />
       <EducationSection />
-      <ExperienceSection />
       <ContactCta />
     </>
   );
